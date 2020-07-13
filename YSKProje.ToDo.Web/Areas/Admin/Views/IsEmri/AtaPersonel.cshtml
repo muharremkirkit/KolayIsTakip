@@ -1,0 +1,180 @@
+﻿@model GorevListDto
+@{
+    ViewData["Title"] = "AtaPersonel";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    string s = (string)ViewBag.Aranan;
+
+}
+<div class="row mt-2">
+    <div class="col-md-12 mb-2">
+
+        @if (!string.IsNullOrWhiteSpace(s))
+        {
+            <div class="border border-dark p-3 mb-2">
+                <strong>
+                    @s
+                </strong> kelimesi için sonuçları görüyorsunuz.
+                <a asp-action="AtaPersonel" asp-route-id="@Model.Id" class="float-right">Filtreyi kaldır</a>
+            </div>
+        }
+
+
+        <form method="get" asp-action="AtaPersonel" class="text-right">
+            <input type="text" name="s" class="form-control-lg border border-primary border-top-0 border-left-0 border-right-0" />
+            <button type="submit" class="btn btn-primary btn-lg">Çalısan Ara</button>
+        </form>
+    </div>
+
+
+    <div class="col-md-5 ">
+
+
+
+        @*<div class="card">
+            <div class="card-header">
+                <blockquote class="blockquote mb-0">
+                    <p class="text-center lead pt-2" style="font-family:Farro">Görev Bilgileri</p>
+
+                </blockquote>
+
+            </div>
+
+
+            <div class="card-body">
+                <h5 class="card-title">@Model.Ad</h5>
+                <p class="card-text">
+                    @Model.Aciklama
+                </p>
+                <p class="card-text">
+                    <strong> Aciliyet Durumu:</strong> <span class="badge badge-primary"> @Model.Aciliyet.Tanim</span>
+                </p>
+                <p class="card-text">
+                    <small>
+                        @Model.OlusturulmaTarih.ToString("D")
+                    </small>
+                </p>
+
+            </div>
+        </div>*@
+
+        <div class="card card-pricing bg-gradient-success border-0 text-center mb-4">
+            <div class="card-header bg-transparent">
+                <h4 class="text-center lead pt-2" style="font-family:Farro;font-size:25px">Görev Bilgileri</h4>
+            </div>
+            <div class="card-body pl-3 pr-3">
+
+                <style>
+                            @@media only screen and (max-width: 600px) {
+                             
+                                }
+                </style>     
+                <ul class="list-group bg-gradient-success" style="">
+                    <li class="list-group-item" style="font-family: Roboto Slab;font-size:20px">@Model.Ad</li>
+                    <li class="list-group-item" style="font-family: Roboto Slab;font-size:20px">@Model.Aciklama</li>
+                    <li class="list-group-item" style="font-family: Roboto Slab;color:crimson;font-size:25px">@Model.Aciliyet.Tanim</li>
+                    <li class="list-group-item" style="font-family: Roboto Slab">@Model.OlusturulmaTarih.ToString("D")</li>
+                </ul>
+                
+
+                @*<ul class="list-unstyled my-4">
+            <li>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="pl-2 text-sm text-white">Complete documentation</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="pl-2 text-sm text-white">Working materials in Sketch</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="pl-2 text-sm text-white">2GB cloud storage</span>
+                    </div>
+                </div>
+            </li>
+        </ul>*@
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-7 ">
+
+
+
+        @foreach (var item in (List<AppUserListDto>)ViewBag.Personeller)
+        {
+            <div class="card  mb-3 p-2">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <img src="~/img/@item.Picture" class="card-img " style="height:240px;width:240px" alt="@item.Name">
+                    </div>
+                    <div class="col card">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-family: Roboto Slab; font-size: 20px">@item.Name @item.SurName</h5>
+                            <p class="card-text" style="font-family: Roboto Slab; font-size: 20px">
+                                <getirGorevAppUserId app-user-id="@item.Id"></getirGorevAppUserId>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">@item.Email</small>
+                                <a  asp-action="GorevlendirPersonel" asp-route-PersonelId="@item.Id" asp-route-GorevId="@Model.Id" class="btn btn-primary btn-lg ">Görevlendir</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <nav aria-label="Page navigation example">
+
+            <ul class="pagination">
+                @if (!string.IsNullOrWhiteSpace(s))
+                {
+                    for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
+                    {
+                        <li class="page-item @(ViewBag.AktifSayfa==i?"active":"")">
+                            <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i" asp-route-s="@s">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
+                    {
+                        <li class="page-item @(ViewBag.AktifSayfa==i?"active":"")">
+                            <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i">@i</a>
+                        </li>
+                    }
+                }
+
+
+            </ul>
+        </nav>
+
+    </div>
+
+
+</div>
+

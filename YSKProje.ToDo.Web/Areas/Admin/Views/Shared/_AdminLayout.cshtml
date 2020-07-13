@@ -1,0 +1,118 @@
+﻿
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    @*<link href="~/lib/bootswatch/bootstrap.min.css" rel="stylesheet" />
+        https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0 *@
+    <!-- Custom styles for this template -->
+
+    <link href="~/lib/template-css/simple-sidebar.css" rel="stylesheet" />
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+
+
+    <link href="~/lib/fontAwesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/argon-dashboard-pro-v1.2.0/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/lib/argon-dashboard-pro-v1.2.0/assets/css/argon.css" rel="stylesheet" />
+    <link href="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Farro&display=swap" rel="stylesheet">
+
+
+
+    <link href="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        @await Component.InvokeAsync("Wrapper")
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            @*<nav class="navbar navbar-expand-lg navbar-light  border border-bottom">
+                    <button class="btn btn-outline-primary btn-sm" id="menu-toggle">
+
+                        <i class="fas fa-exchange-alt mr-2"></i> Menü
+                    </button>
+
+
+                </nav>
+            *@
+
+            <div style="padding-right:15px;padding-left:15px">
+                <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom d-flex align-items-center">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <!-- Search form -->
+                            <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+                                <div class="form-group mb-0">
+                                    <div class="input-group input-group-alternative input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Search" type="text">
+                                    </div>
+                                </div>
+                                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </form>
+                            <!-- Navbar links -->
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+            <div class="container-fluid">
+
+                @RenderBody()
+
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/fontAwesome/js/all.min.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/js-cookie/js.cookie.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/moment/min/moment.min.js"></script>
+
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="~/lib/argon-dashboard-pro-v1.2.0/assets/js/argon.js"></script>
+    @RenderSection("JavaScript", false)
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });</script>
+
+</body>
+
+</html>
+
